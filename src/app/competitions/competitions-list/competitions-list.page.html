@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Competitions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-around">
+      <ion-col
+        *ngFor="let competition of (competitions$ | async)?.competitions"
+        [routerLink]="['/competitions/', competition.id, 'teams']"
+        sizeMd="4"
+        sizeLg="3"
+      >
+        <ion-card class="ion-text-center">
+          <ion-card-header>
+            <ion-card-title> {{ competition.name }} </ion-card-title>
+            <ion-card-subtitle>
+              Last updated at {{ competition.lastUpdated | date }}
+            </ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

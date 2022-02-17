@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Teams from competition</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Select a season</ion-label>
+    <ion-select placeholder="Select One" [formControl]="selectedSeason">
+      <ion-select-option *ngFor="let season of seasons" [value]="season">
+        {{ season }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+  <p *ngIf="error">
+    An error has occurred while getting the teams list: ({{error.errorCode}}) {{
+    error.message }}
+  </p>
+
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-around">
+      <ion-col
+        *ngFor="let team of (teamsList$ | async)?.teams"
+        sizeMd="3"
+        sizeLg="2"
+        [routerLink]="[team.id]"
+      >
+        <ion-card>
+          <div>
+            <ion-img
+              *ngIf="team.crestUrl"
+              [src]="team.crestUrl"
+              alt="Flag not found"
+            ></ion-img>
+          </div>
+
+          <ion-card-content>
+            <small> {{ team.tla }} </small>
+            {{ team.name }}
+          </ion-card-content>
+        </ion-card>
+      </ion-col></ion-row
+    ></ion-grid
+  >
+</ion-content>
